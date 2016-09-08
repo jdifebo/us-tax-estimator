@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>US Tax Estimator</title>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <h1>US Tax Estimator 2016</h1>
+        <hr/>
+        <h4>Choose your filing status and enter your income, deductions, and exemptions to 
+            calculate your approximate US 2016 federal income tax!
+        </h4>
+        <br>
+        <div>
+            <label for="filing-status">Filing Status</label>
+            <select name="select" id="filing-status">
+                <option value="single">Single</option>
+                <option value="marriedFilingJointly">Married Filing Jointly</option>
+            </select>
+        </div>
+        <div>
+            <label for="gross">Gross Income</label>
+            <input type="number" id="gross" autofocus=true value="0">
+        </div>
+        <div>
+            <label for="exemptions">Exemptions</label>
+            <span id="exemption-muptiplier"><span id="exemption-multiplier-value"></span> &times; &nbsp;<input type="number" id="exemptions"></span>
+        </div>
+        <div>
+            <label for="deductions">Deductions</label>
+            <input type="number" id="deductions">
+        </div>
+        <h3>Taxable Income: <span id="taxable"></span></h3>
+        <h3>Tax: <span id="tax"></span></h3>
+        <h3>Effective Tax Rate: <span id="effective-tax-rate"></span></h3>
+        <br>
+        <h6>
+            This tool is not meant to provide tax advice. This tool is for informational purposes only, and is 
+            not intended to provide, and should not be relied on for tax advice. You should consult your own 
+            tax advisors before engaging in any transaction.
+        </h6>
+    </div>
+
+<script src="bundle.js"></script>
+</body>
+</html>

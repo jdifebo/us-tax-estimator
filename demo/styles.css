@@ -1,0 +1,27 @@
+body {
+  margin: 0 auto;
+  max-width: 30em;
+  font-family: "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  padding: 4em 1em;
+  color: #555;
+  background: #eee;
+}
+
+body > div {
+    padding: 2em 4em;
+    background: cyan;
+    background: linear-gradient(lightskyblue, cyan);
+    box-shadow: 0px 0px 24px 9px rgba(0,0,0,0.7);
+    border-radius: 15px;
+}
+
+h1,
+h2,
+strong {
+  color: #333;
+}
+
+input, select, #taxable, #exemption-muptiplier, #tax, #effective-tax-rate {
+    float: right;
+}
