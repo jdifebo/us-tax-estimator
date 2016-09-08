@@ -1,15 +1,16 @@
 {
   "name": "us-tax-estimator",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Estimate federal income tax by providing basic income information.",
   "main": "us-tax-estimator.js",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild-demo": "npm run clean && mkdir dist",
     "build-demo": "cp demo/*.html dist/ && cp demo/*.css dist/ && browserify demo/demo.js -o dist/bundle.js",
+    "deploy-demo": "npm run build-demo && git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Joe DiFebo",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.1.0"

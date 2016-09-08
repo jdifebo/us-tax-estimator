@@ -7,7 +7,7 @@ function calculateTax(){
     var deductions = document.getElementById("deductions").value;
 
     // Calculate and display the value of exemptions accounting for phase-out
-    var exemptionAmount = taxEstimator.calculateExemptionAmount(grossIncome, filingStatus);
+    var exemptionAmount = taxEstimator.calculateExemptionAmount(filingStatus, grossIncome);
     document.getElementById("exemption-multiplier-value").innerHTML = "$" + exemptionAmount.toLocaleString();
     
     // Calculate and display taxable income by doing subtraction
