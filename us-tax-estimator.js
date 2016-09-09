@@ -34,9 +34,16 @@ var standardDeduction = {
 
 var defaultExemptionAmount = 4050;
 
-function calculateTaxFromGrossIncome(filingStatus, grossIncome, exemptions, deductions){
-    var taxableIncome = grossIncome - deductions - exemptions * calculateExemptionAmount(filingStatus, grossIncome);
-    return calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+function calculate(filingStatus, grossIncome, exemptions, deductions){
+    var exemptionAmount = calculateExemptionAmount(filingStatus, grossIncome);
+    var taxableIncome = grossIncome - deductions - exemptions * exemptionAmount;
+    var tax = calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+    return {
+        exemptionAmount : exemptionAmount,
+        taxableIncome : taxableIncome,
+        tax : tax,
+        effectiveTaxRate : tax / grossIncome
+    };
 }
 
 function calculateTaxFromTaxableIncome(filingStatus, taxableIncome){
@@ -99,9 +106,7 @@ function calculateExemptionAmount(filingStatus, income){
 }
 
 module.exports = {
-    calculateTaxFromTaxableIncome : calculateTaxFromTaxableIncome,
-    calculateTaxFromGrossIncome : calculateTaxFromGrossIncome,
-    calculateExemptionAmount : calculateExemptionAmount,
+    calculate : calculate,
     constants : {
         taxBrackets : taxBrackets,
         standardDeduction: standardDeduction,

@@ -6,22 +6,15 @@ function calculateTax(){
     var grossIncome = document.getElementById("gross").value;
     var exemptions = document.getElementById("exemptions").value;
     var deductions = document.getElementById("deductions").value;
-
-    // Calculate and display the value of exemptions accounting for phase-out
-    var exemptionAmount = taxEstimator.calculateExemptionAmount(filingStatus, grossIncome);
-    document.getElementById("exemption-multiplier-value").innerHTML = "$" + exemptionAmount.toLocaleString();
     
-    // Calculate and display taxable income by doing subtraction
-    var taxableIncome = Math.max(0, grossIncome - exemptions * exemptionAmount - deductions);
-    document.getElementById("taxable").innerHTML = "$" + taxableIncome.toLocaleString();
-
-    // Finally calculate and display the actual tax owed
-    var tax = taxEstimator.calculateTaxFromGrossIncome(filingStatus, grossIncome, exemptions, deductions);
-    document.getElementById("tax").innerHTML = "$" + tax.toLocaleString();
-
-    // Calculate and display the effective tax rate
-    var effectiveTaxRate = tax / grossIncome * 100;
-    document.getElementById("effective-tax-rate").innerHTML = effectiveTaxRate.toFixed(2) + "%";
+    // Calculate stuff
+    var taxInfo = taxEstimator.calculate(filingStatus, grossIncome, exemptions, deductions);
+    
+    // Display stuff
+    document.getElementById("exemption-multiplier-value").innerHTML = "$" + taxInfo.exemptionAmount.toLocaleString();
+    document.getElementById("taxable").innerHTML = "$" + taxInfo.taxableIncome.toLocaleString();
+    document.getElementById("tax").innerHTML = "$" + taxInfo.tax.toLocaleString();
+    document.getElementById("effective-tax-rate").innerHTML = (taxInfo.effectiveTaxRate * 100).toFixed(2) + "%";
 }
 
 /**
@@ -82,9 +75,16 @@ var standardDeduction = {
 
 var defaultExemptionAmount = 4050;
 
-function calculateTaxFromGrossIncome(filingStatus, grossIncome, exemptions, deductions){
-    var taxableIncome = grossIncome - deductions - exemptions * calculateExemptionAmount(filingStatus, grossIncome);
-    return calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+function calculate(filingStatus, grossIncome, exemptions, deductions){
+    var exemptionAmount = calculateExemptionAmount(filingStatus, grossIncome);
+    var taxableIncome = grossIncome - deductions - exemptions * exemptionAmount;
+    var tax = calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+    return {
+        exemptionAmount : exemptionAmount,
+        taxableIncome : taxableIncome,
+        tax : tax,
+        effectiveTaxRate : tax / grossIncome
+    };
 }
 
 function calculateTaxFromTaxableIncome(filingStatus, taxableIncome){
@@ -147,9 +147,9 @@ function calculateExemptionAmount(filingStatus, income){
 }
 
 module.exports = {
-    calculateTaxFromTaxableIncome : calculateTaxFromTaxableIncome,
-    calculateTaxFromGrossIncome : calculateTaxFromGrossIncome,
-    calculateExemptionAmount : calculateExemptionAmount,
+    calculate : calculate,
+    // calculateTaxFromGrossIncome : calculateTaxFromGrossIncome,
+    // calculateExemptionAmount : calculateExemptionAmount,
     constants : {
         taxBrackets : taxBrackets,
         standardDeduction: standardDeduction,

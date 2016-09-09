@@ -8,21 +8,24 @@ tax advisors before engaging in any transaction.
 ## Usage
 
 ```js
-var taxEstimator = require("./us-tax-estimator");
+var estimator = require("./us-tax-estimator.js");
 
-taxEstimator.calculateTaxFromTaxableIncome("single", 100000);
-// -> 21044
+var filingStatus = "single"; // "single" or "marriedFilingJointly"
+var grossIncome = 300000;
+var exemptions = 1;
+var deductions = estimator.constants.standardDeduction[filingStatus];
 
-var filingStatus = "marriedFilingJointly"   // Choose between "single" and "marriedFilingJointly"
-var grossIncome = 100000
-var exemptions = 2;
-var deductions = taxEstimator.constants.standardDeduction[filingStatus];
-taxEstimator.calculateTaxFromGrossIncome(filingStatus, grossIncome, exemptions, deductions);
-// -> 11374
+estimator.calculate(filingStatus, grossIncome, exemptions, deductions);
 
-// Calculate exemptions accounting for phase-out at high income
-taxEstimator.calculateExemptionAmount("single", 300000);
-// -> 2673
+/** Returns an object with 4 properties that looks like this:
+ * { 
+ *    exemptionAmount: 2673,      // This is how much each exemption is worth accounting for phase-out                                                                                                                       
+ *    taxableIncome: 291027,                                                                                                                             
+ *    tax: 79568,                                                                                                                                        
+ *    effectiveTaxRate: 0.26522666666666667 
+ * } 
+ */
 ```
+
 
 View a simple demo here: https://jdifebo.github.io/us-tax-estimator/

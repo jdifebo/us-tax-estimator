@@ -5,22 +5,15 @@ function calculateTax(){
     var grossIncome = document.getElementById("gross").value;
     var exemptions = document.getElementById("exemptions").value;
     var deductions = document.getElementById("deductions").value;
-
-    // Calculate and display the value of exemptions accounting for phase-out
-    var exemptionAmount = taxEstimator.calculateExemptionAmount(filingStatus, grossIncome);
-    document.getElementById("exemption-multiplier-value").innerHTML = "$" + exemptionAmount.toLocaleString();
     
-    // Calculate and display taxable income by doing subtraction
-    var taxableIncome = Math.max(0, grossIncome - exemptions * exemptionAmount - deductions);
-    document.getElementById("taxable").innerHTML = "$" + taxableIncome.toLocaleString();
-
-    // Finally calculate and display the actual tax owed
-    var tax = taxEstimator.calculateTaxFromGrossIncome(filingStatus, grossIncome, exemptions, deductions);
-    document.getElementById("tax").innerHTML = "$" + tax.toLocaleString();
-
-    // Calculate and display the effective tax rate
-    var effectiveTaxRate = tax / grossIncome * 100;
-    document.getElementById("effective-tax-rate").innerHTML = effectiveTaxRate.toFixed(2) + "%";
+    // Calculate stuff
+    var taxInfo = taxEstimator.calculate(filingStatus, grossIncome, exemptions, deductions);
+    
+    // Display stuff
+    document.getElementById("exemption-multiplier-value").innerHTML = "$" + taxInfo.exemptionAmount.toLocaleString();
+    document.getElementById("taxable").innerHTML = "$" + taxInfo.taxableIncome.toLocaleString();
+    document.getElementById("tax").innerHTML = "$" + taxInfo.tax.toLocaleString();
+    document.getElementById("effective-tax-rate").innerHTML = (taxInfo.effectiveTaxRate * 100).toFixed(2) + "%";
 }
 
 /**
