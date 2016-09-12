@@ -59,12 +59,22 @@ var taxBrackets = {
         {rate: .33, upTo : 413350},
         {rate: .35, upTo : 466950},
         {rate: .396}
+    ], 
+    headOfHousehold : [
+        {rate: .1, upTo : 13250},
+        {rate: .15, upTo : 50400},
+        {rate: .25, upTo : 130150},
+        {rate: .28, upTo : 210800},
+        {rate: .33, upTo : 413350},
+        {rate: .35, upTo : 441000},
+        {rate: .396}
     ]
 }
 
 var exemptionPhaseoutStart = {
     single : 259400,
-    marriedFilingJointly : 311300
+    marriedFilingJointly : 311300,
+    headOfHousehold : 285350
 }
 
 var standardDeduction = {
@@ -77,7 +87,7 @@ var defaultExemptionAmount = 4050;
 
 function calculate(filingStatus, grossIncome, exemptions, deductions){
     var exemptionAmount = calculateExemptionAmount(filingStatus, grossIncome);
-    var taxableIncome = grossIncome - deductions - exemptions * exemptionAmount;
+    var taxableIncome = Math.max(0, grossIncome - deductions - exemptions * exemptionAmount);
     var tax = calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
     return {
         exemptionAmount : exemptionAmount,
@@ -148,8 +158,6 @@ function calculateExemptionAmount(filingStatus, income){
 
 module.exports = {
     calculate : calculate,
-    // calculateTaxFromGrossIncome : calculateTaxFromGrossIncome,
-    // calculateExemptionAmount : calculateExemptionAmount,
     constants : {
         taxBrackets : taxBrackets,
         standardDeduction: standardDeduction,
