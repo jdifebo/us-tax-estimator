@@ -1,6 +1,6 @@
 {
   "name": "us-tax-estimator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Estimate federal income tax by providing basic income information.",
   "main": "us-tax-estimator.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "deploy-demo": "npm run build-demo && git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Joe DiFebo",  
+  "author": "Joe DiFebo",
   "repository": {
     "type": "git",
     "url": "https://github.com/jdifebo/us-tax-estimator.git"
