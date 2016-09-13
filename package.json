@@ -10,7 +10,11 @@
     "deploy-demo": "npm run build-demo && git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Joe DiFebo",
+  "author": "Joe DiFebo",  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdifebo/us-tax-estimator.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "browserify": "^13.1.0"

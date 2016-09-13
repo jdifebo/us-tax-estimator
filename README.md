@@ -8,7 +8,7 @@ tax advisors before engaging in any transaction.
 ## Usage
 
 ```js
-var estimator = require("us-tax-estimator.js");
+var estimator = require("us-tax-estimator");
 
 var filingStatus = "single"; // "single", "marriedFilingJointly", or "headOfHousehold"
 var grossIncome = 300000;
