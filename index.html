@@ -11,12 +11,20 @@
 </head>
 <body>
     <div>
-        <h1>US Tax Estimator 2016</h1>
+        <h1>US Tax Estimator</h1>
         <hr/>
-        <h4>Choose your filing status and enter your income, deductions, and exemptions to 
-            calculate your approximate US 2016 federal income tax!
+        <h4>
+            Enter some basic information to calculate your approximate US federal income tax.  Keep in mind, this does not include things
+            such as FICA taxes, state taxes, and AMT, so it should not be used as tax advice.
         </h4>
         <br>
+        <div>
+            <label for="filing-status">Year</label>
+            <select id="year">
+                <option>2017</option>
+                <option>2016</option>
+            </select>
+        </div>
         <div>
             <label for="filing-status">Filing Status</label>
             <select name="select" id="filing-status">
@@ -40,6 +48,12 @@
         <h3>Taxable Income: <span id="taxable"></span></h3>
         <h3>Tax: <span id="tax"></span></h3>
         <h3>Effective Tax Rate: <span id="effective-tax-rate"></span></h3>
+        <br>
+        <a href="https://www.npmjs.com/package/us-tax-estimator"><img height="24px" width="24px" src="n.svg"></img></a>
+        <a class="link-text" href="https://www.npmjs.com/package/us-tax-estimator">Package on NPM</a>
+        <br>
+        <a href="https://github.com/jdifebo/us-tax-estimator"><img height="24px" width="24px" src="GitHub-Mark-Light-32px.png"></img></a>
+        <a class="link-text" href="https://github.com/jdifebo/us-tax-estimator">Source on Github</a>
         <br>
         <h6>
             This tool is not meant to provide tax advice. This tool is for informational purposes only, and is 

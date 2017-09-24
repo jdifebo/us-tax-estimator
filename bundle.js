@@ -1,14 +1,20 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports={
+    "2016": 4050,
+    "2017": 4050
+}
+},{}],2:[function(require,module,exports){
 var taxEstimator = require("../us-tax-estimator");
 
 function calculateTax(){
+    var year = document.getElementById("year").value;
     var filingStatus = document.getElementById("filing-status").value;
     var grossIncome = document.getElementById("gross").value;
     var exemptions = document.getElementById("exemptions").value;
     var deductions = document.getElementById("deductions").value;
     
     // Calculate stuff
-    var taxInfo = taxEstimator.calculate(filingStatus, grossIncome, exemptions, deductions);
+    var taxInfo = taxEstimator.calculate(year, filingStatus, grossIncome, exemptions, deductions);
     
     // Display stuff
     document.getElementById("exemption-multiplier-value").innerHTML = "$" + taxInfo.exemptionAmount.toLocaleString();
@@ -22,8 +28,9 @@ function calculateTax(){
  * reasonable default values for single vs joint
  */
 function updateFieldsAndTax(){
+    var year = document.getElementById("year").value;
     var filingStatus = document.getElementById("filing-status").value;
-    document.getElementById("deductions").value = taxEstimator.constants.standardDeduction[filingStatus];
+    document.getElementById("deductions").value = taxEstimator.constants.standardDeduction[year][filingStatus];
     if (filingStatus == "marriedFilingJointly"){
         document.getElementById("exemptions").value = 2;
     }
@@ -37,58 +44,117 @@ document.getElementById("gross").addEventListener("keyup", calculateTax);
 document.getElementById("exemptions").addEventListener("keyup", calculateTax);
 document.getElementById("deductions").addEventListener("keyup", calculateTax);
 document.getElementById("filing-status").addEventListener("change", updateFieldsAndTax);
+document.getElementById("year").addEventListener("change", updateFieldsAndTax);
 updateFieldsAndTax();
-},{"../us-tax-estimator":2}],2:[function(require,module,exports){
+},{"../us-tax-estimator":6}],3:[function(require,module,exports){
+module.exports={
+    "2016": {
+        "single" : 259400,
+        "marriedFilingJointly" : 311300,
+        "headOfHousehold" : 285350
+    },
+    "2017": {
+        "single" : 261500,
+        "marriedFilingJointly" : 313800,
+        "headOfHousehold" : 287650
+    }
+}
+
+
+},{}],4:[function(require,module,exports){
+module.exports={
+    "2016": {
+        "single": 6300,
+        "marriedFilingJointly": 12600,
+        "headOfHousehold": 9300
+    },
+    "2017": {
+        "single": 6350,
+        "marriedFilingJointly": 12700,
+        "headOfHousehold": 9350
+    }
+}
+
+
+},{}],5:[function(require,module,exports){
+module.exports={
+    "2016": {
+        "single": [
+            {"rate": 0.1, "upTo": 9275},
+            {"rate": 0.15, "upTo": 37650},
+            {"rate": 0.25, "upTo": 91150},
+            {"rate": 0.28, "upTo": 190150},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 415050},
+            {"rate": 0.396}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 18550},
+            {"rate": 0.15, "upTo": 75300},
+            {"rate": 0.25, "upTo": 151900},
+            {"rate": 0.28, "upTo": 231450},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 466950},
+            {"rate": 0.396}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13250},
+            {"rate": 0.15, "upTo": 50400},
+            {"rate": 0.25, "upTo": 130150},
+            {"rate": 0.28, "upTo": 210800},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 441000},
+            {"rate": 0.396}
+        ]
+    },
+    "2017": {
+        "single": [
+            {"rate": 0.1, "upTo": 9325},
+            {"rate": 0.15, "upTo": 37950},
+            {"rate": 0.25, "upTo": 91900},
+            {"rate": 0.28, "upTo": 191650},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 418400},
+            {"rate": 0.396}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 18650},
+            {"rate": 0.15, "upTo": 75900},
+            {"rate": 0.25, "upTo": 153100},
+            {"rate": 0.28, "upTo": 233350},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 470700},
+            {"rate": 0.396}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13350},
+            {"rate": 0.15, "upTo": 50800},
+            {"rate": 0.25, "upTo": 131200},
+            {"rate": 0.28, "upTo": 212500},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 444500},
+            {"rate": 0.396}
+        ]
+    }
+}
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
-var taxBrackets = {
-    single : [
-        {rate: .1, upTo : 9275},
-        {rate: .15, upTo : 37650},
-        {rate: .25, upTo : 91150},
-        {rate: .28, upTo : 190150},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 415050},
-        {rate: .396}
-    ], 
-    marriedFilingJointly : [
-        {rate: .1, upTo : 18550},
-        {rate: .15, upTo : 75300},
-        {rate: .25, upTo : 151900},
-        {rate: .28, upTo : 231450},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 466950},
-        {rate: .396}
-    ], 
-    headOfHousehold : [
-        {rate: .1, upTo : 13250},
-        {rate: .15, upTo : 50400},
-        {rate: .25, upTo : 130150},
-        {rate: .28, upTo : 210800},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 441000},
-        {rate: .396}
-    ]
-}
+var taxBrackets = require("./tax-brackets.json");
 
-var exemptionPhaseoutStart = {
-    single : 259400,
-    marriedFilingJointly : 311300,
-    headOfHousehold : 285350
-}
 
-var standardDeduction = {
-    single: 6300,
-    marriedFilingJointly: 12600,
-    headOfHousehold: 9300
-}
 
-var defaultExemptionAmount = 4050;
+var exemptionPhaseoutStart = require("./exemption-phaseout-start.json")
 
-function calculate(filingStatus, grossIncome, exemptions, deductions){
-    var exemptionAmount = calculateExemptionAmount(filingStatus, grossIncome);
+var standardDeduction = require("./standard-deduction.json");
+
+var defaultExemptionAmount = require("./default-exemption-amount.json");
+
+function calculate(year, filingStatus, grossIncome, exemptions, deductions){
+    var exemptionAmount = calculateExemptionAmount(year, filingStatus, grossIncome);
     var taxableIncome = Math.max(0, grossIncome - deductions - exemptions * exemptionAmount);
-    var tax = calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+    var tax = calculateTaxFromTaxableIncome(year, filingStatus, taxableIncome);
     return {
         exemptionAmount : exemptionAmount,
         taxableIncome : taxableIncome,
@@ -97,9 +163,9 @@ function calculate(filingStatus, grossIncome, exemptions, deductions){
     };
 }
 
-function calculateTaxFromTaxableIncome(filingStatus, taxableIncome){
+function calculateTaxFromTaxableIncome(year, filingStatus, taxableIncome){
     taxableIncome = roundIncome(taxableIncome);
-    var taxBracketsToUse = taxBrackets[filingStatus];
+    var taxBracketsToUse = taxBrackets[year][filingStatus];
     var tax = calculateTaxForFirstBracket(taxableIncome, taxBracketsToUse[0]);
     for (var i = 1; i < taxBracketsToUse.length - 1; i++){
         tax += calculateTaxForBracket(taxableIncome, taxBracketsToUse[i-1], taxBracketsToUse[i]);
@@ -149,11 +215,11 @@ function roundIncome(num){
  * at lower incomes and 0 for very high incomes, while returning a value in between the two if income
  * is in the phase-out range.
  */
-function calculateExemptionAmount(filingStatus, income){
-    var incomeAbovePhaseoutStart = Math.max(0, income - exemptionPhaseoutStart[filingStatus]);
+function calculateExemptionAmount(year, filingStatus, income){
+    var incomeAbovePhaseoutStart = Math.max(0, income - exemptionPhaseoutStart[year][filingStatus]);
     var stepsAbovePhaseoutStart = Math.ceil(incomeAbovePhaseoutStart / 2500);
     var exemptionPercent = Math.max(0, 1 - (stepsAbovePhaseoutStart * .02));
-    return Math.round(exemptionPercent * defaultExemptionAmount);
+    return Math.round(exemptionPercent * defaultExemptionAmount[year]);
 }
 
 module.exports = {
@@ -164,4 +230,4 @@ module.exports = {
         defaultExemptionAmount: defaultExemptionAmount
     }
 };
-},{}]},{},[1]);
+},{"./default-exemption-amount.json":1,"./exemption-phaseout-start.json":3,"./standard-deduction.json":4,"./tax-brackets.json":5}]},{},[2]);
