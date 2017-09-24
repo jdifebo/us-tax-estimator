@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild-demo": "npm run clean && mkdir dist",
-    "build-demo": "cp demo/*.html dist/ && cp demo/*.css dist/ && browserify demo/demo.js -o dist/bundle.js",
+    "build-demo": "cp demo/* dist/ && browserify demo/demo.js -o dist/bundle.js",
     "deploy-demo": "npm run build-demo && git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

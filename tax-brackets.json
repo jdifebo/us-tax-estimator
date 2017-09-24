@@ -1,0 +1,60 @@
+{
+    "2016": {
+        "single": [
+            {"rate": 0.1, "upTo": 9275},
+            {"rate": 0.15, "upTo": 37650},
+            {"rate": 0.25, "upTo": 91150},
+            {"rate": 0.28, "upTo": 190150},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 415050},
+            {"rate": 0.396}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 18550},
+            {"rate": 0.15, "upTo": 75300},
+            {"rate": 0.25, "upTo": 151900},
+            {"rate": 0.28, "upTo": 231450},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 466950},
+            {"rate": 0.396}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13250},
+            {"rate": 0.15, "upTo": 50400},
+            {"rate": 0.25, "upTo": 130150},
+            {"rate": 0.28, "upTo": 210800},
+            {"rate": 0.33, "upTo": 413350},
+            {"rate": 0.35, "upTo": 441000},
+            {"rate": 0.396}
+        ]
+    },
+    "2017": {
+        "single": [
+            {"rate": 0.1, "upTo": 9325},
+            {"rate": 0.15, "upTo": 37950},
+            {"rate": 0.25, "upTo": 91900},
+            {"rate": 0.28, "upTo": 191650},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 418400},
+            {"rate": 0.396}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 18650},
+            {"rate": 0.15, "upTo": 75900},
+            {"rate": 0.25, "upTo": 153100},
+            {"rate": 0.28, "upTo": 233350},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 470700},
+            {"rate": 0.396}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13350},
+            {"rate": 0.15, "upTo": 50800},
+            {"rate": 0.25, "upTo": 131200},
+            {"rate": 0.28, "upTo": 212500},
+            {"rate": 0.33, "upTo": 416700},
+            {"rate": 0.35, "upTo": 444500},
+            {"rate": 0.396}
+        ]
+    }
+}

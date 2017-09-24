@@ -1,53 +1,19 @@
 'use strict';
 
-var taxBrackets = {
-    single : [
-        {rate: .1, upTo : 9275},
-        {rate: .15, upTo : 37650},
-        {rate: .25, upTo : 91150},
-        {rate: .28, upTo : 190150},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 415050},
-        {rate: .396}
-    ], 
-    marriedFilingJointly : [
-        {rate: .1, upTo : 18550},
-        {rate: .15, upTo : 75300},
-        {rate: .25, upTo : 151900},
-        {rate: .28, upTo : 231450},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 466950},
-        {rate: .396}
-    ], 
-    headOfHousehold : [
-        {rate: .1, upTo : 13250},
-        {rate: .15, upTo : 50400},
-        {rate: .25, upTo : 130150},
-        {rate: .28, upTo : 210800},
-        {rate: .33, upTo : 413350},
-        {rate: .35, upTo : 441000},
-        {rate: .396}
-    ]
-}
+var taxBrackets = require("./tax-brackets.json");
 
-var exemptionPhaseoutStart = {
-    single : 259400,
-    marriedFilingJointly : 311300,
-    headOfHousehold : 285350
-}
 
-var standardDeduction = {
-    single: 6300,
-    marriedFilingJointly: 12600,
-    headOfHousehold: 9300
-}
 
-var defaultExemptionAmount = 4050;
+var exemptionPhaseoutStart = require("./exemption-phaseout-start.json")
 
-function calculate(filingStatus, grossIncome, exemptions, deductions){
-    var exemptionAmount = calculateExemptionAmount(filingStatus, grossIncome);
+var standardDeduction = require("./standard-deduction.json");
+
+var defaultExemptionAmount = require("./default-exemption-amount.json");
+
+function calculate(year, filingStatus, grossIncome, exemptions, deductions){
+    var exemptionAmount = calculateExemptionAmount(year, filingStatus, grossIncome);
     var taxableIncome = Math.max(0, grossIncome - deductions - exemptions * exemptionAmount);
-    var tax = calculateTaxFromTaxableIncome(filingStatus, taxableIncome);
+    var tax = calculateTaxFromTaxableIncome(year, filingStatus, taxableIncome);
     return {
         exemptionAmount : exemptionAmount,
         taxableIncome : taxableIncome,
@@ -56,9 +22,9 @@ function calculate(filingStatus, grossIncome, exemptions, deductions){
     };
 }
 
-function calculateTaxFromTaxableIncome(filingStatus, taxableIncome){
+function calculateTaxFromTaxableIncome(year, filingStatus, taxableIncome){
     taxableIncome = roundIncome(taxableIncome);
-    var taxBracketsToUse = taxBrackets[filingStatus];
+    var taxBracketsToUse = taxBrackets[year][filingStatus];
     var tax = calculateTaxForFirstBracket(taxableIncome, taxBracketsToUse[0]);
     for (var i = 1; i < taxBracketsToUse.length - 1; i++){
         tax += calculateTaxForBracket(taxableIncome, taxBracketsToUse[i-1], taxBracketsToUse[i]);
@@ -108,11 +74,11 @@ function roundIncome(num){
  * at lower incomes and 0 for very high incomes, while returning a value in between the two if income
  * is in the phase-out range.
  */
-function calculateExemptionAmount(filingStatus, income){
-    var incomeAbovePhaseoutStart = Math.max(0, income - exemptionPhaseoutStart[filingStatus]);
+function calculateExemptionAmount(year, filingStatus, income){
+    var incomeAbovePhaseoutStart = Math.max(0, income - exemptionPhaseoutStart[year][filingStatus]);
     var stepsAbovePhaseoutStart = Math.ceil(incomeAbovePhaseoutStart / 2500);
     var exemptionPercent = Math.max(0, 1 - (stepsAbovePhaseoutStart * .02));
-    return Math.round(exemptionPercent * defaultExemptionAmount);
+    return Math.round(exemptionPercent * defaultExemptionAmount[year]);
 }
 
 module.exports = {

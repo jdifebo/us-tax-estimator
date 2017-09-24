@@ -8,21 +8,22 @@ tax advisors before engaging in any transaction.
 ## Usage
 
 ```js
-var estimator = require("us-tax-estimator");
+var estimator = require("./us-tax-estimator.js");
 
-var filingStatus = "single"; // "single", "marriedFilingJointly", or "headOfHousehold"
+var year = "2017";  // 2017 or 2016
+var filingStatus = "single"; // "single" or "marriedFilingJointly"
 var grossIncome = 300000;
 var exemptions = 1;
-var deductions = estimator.constants.standardDeduction[filingStatus];
+var deductions = estimator.constants.standardDeduction[year][filingStatus];
 
-estimator.calculate(filingStatus, grossIncome, exemptions, deductions);
+var tax = estimator.calculate(year, filingStatus, grossIncome, exemptions, deductions);
 
 /** Returns an object with 4 properties that looks like this:
  * { 
- *    exemptionAmount: 2673,      // This is how much each exemption is worth accounting for phase-out                                                                                                                       
- *    taxableIncome: 291027,                                                                                                                             
- *    tax: 79568,                                                                                                                                        
- *    effectiveTaxRate: 0.26522666666666667 
+ *    exemptionAmount: 2754,                                                                                                                             
+ *    taxableIncome: 290896,                                                                                                                             
+ *    tax: 79388,                                                                                                                                        
+ *    effectiveTaxRate: 0.2646266666666667 
  * } 
  */
 ```
