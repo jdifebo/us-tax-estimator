@@ -2,12 +2,20 @@
     "2016": {
         "single": 6300,
         "marriedFilingJointly": 12600,
+        "marriedFilingSeparately": 6300,
         "headOfHousehold": 9300
     },
     "2017": {
         "single": 6350,
         "marriedFilingJointly": 12700,
+        "marriedFilingSeparately": 6350,
         "headOfHousehold": 9350
+    },
+    "2018": {
+        "single": 12000,
+        "marriedFilingJointly": 24000,
+        "marriedFilingSeparately": 12000,
+        "headOfHousehold": 18000
     }
 }
 
