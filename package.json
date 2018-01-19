@@ -1,6 +1,6 @@
 {
   "name": "us-tax-estimator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Estimate federal income tax by providing basic income information.",
   "main": "us-tax-estimator.js",
   "scripts": {
