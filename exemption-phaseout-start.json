@@ -16,6 +16,12 @@
         "marriedFilingJointly" : 0,
         "marriedFilingSeparately" : 0,
         "headOfHousehold" : 0
+    },
+    "2019": {
+        "single" : 0,
+        "marriedFilingJointly" : 0,
+        "marriedFilingSeparately" : 0,
+        "headOfHousehold" : 0
     }
 }
 

@@ -16,6 +16,12 @@
         "marriedFilingJointly": 24000,
         "marriedFilingSeparately": 12000,
         "headOfHousehold": 18000
+    },
+    "2019": {
+        "single": 12200,
+        "marriedFilingJointly": 24400,
+        "marriedFilingSeparately": 12200,
+        "headOfHousehold": 18350
     }
 }
 

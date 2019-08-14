@@ -112,5 +112,43 @@
             {"rate": 0.35, "upTo": 500000},
             {"rate": 0.37}
         ]
+    },
+    "2019": {
+        "single": [
+            {"rate": 0.1, "upTo": 9700},
+            {"rate": 0.12, "upTo": 39745},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160725},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 510300},
+            {"rate": 0.37}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 19400},
+            {"rate": 0.12, "upTo": 78950},
+            {"rate": 0.22, "upTo": 168400},
+            {"rate": 0.24, "upTo": 321450},
+            {"rate": 0.32, "upTo": 408200},
+            {"rate": 0.35, "upTo": 612350},
+            {"rate": 0.37}
+        ],
+        "marriedFilingSeparately": [
+            {"rate": 0.1, "upTo": 9700},
+            {"rate": 0.12, "upTo": 39475},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160725},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 306175},
+            {"rate": 0.37}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13850},
+            {"rate": 0.12, "upTo": 52850},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160700},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 510300},
+            {"rate": 0.37}
+        ]
     }
 }
