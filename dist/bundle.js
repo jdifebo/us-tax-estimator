@@ -2,7 +2,8 @@
 module.exports={
     "2016": 4050,
     "2017": 4050,
-    "2018": 0
+    "2018": 0,
+    "2019": 0
 }
 },{}],2:[function(require,module,exports){
 var taxEstimator = require("../us-tax-estimator");
@@ -66,6 +67,12 @@ module.exports={
         "marriedFilingJointly" : 0,
         "marriedFilingSeparately" : 0,
         "headOfHousehold" : 0
+    },
+    "2019": {
+        "single" : 0,
+        "marriedFilingJointly" : 0,
+        "marriedFilingSeparately" : 0,
+        "headOfHousehold" : 0
     }
 }
 
@@ -89,6 +96,12 @@ module.exports={
         "marriedFilingJointly": 24000,
         "marriedFilingSeparately": 12000,
         "headOfHousehold": 18000
+    },
+    "2019": {
+        "single": 12200,
+        "marriedFilingJointly": 24400,
+        "marriedFilingSeparately": 12200,
+        "headOfHousehold": 18350
     }
 }
 
@@ -206,6 +219,44 @@ module.exports={
             {"rate": 0.24, "upTo": 157500},
             {"rate": 0.32, "upTo": 200000},
             {"rate": 0.35, "upTo": 500000},
+            {"rate": 0.37}
+        ]
+    },
+    "2019": {
+        "single": [
+            {"rate": 0.1, "upTo": 9700},
+            {"rate": 0.12, "upTo": 39745},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160725},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 510300},
+            {"rate": 0.37}
+        ],
+        "marriedFilingJointly": [
+            {"rate": 0.1, "upTo": 19400},
+            {"rate": 0.12, "upTo": 78950},
+            {"rate": 0.22, "upTo": 168400},
+            {"rate": 0.24, "upTo": 321450},
+            {"rate": 0.32, "upTo": 408200},
+            {"rate": 0.35, "upTo": 612350},
+            {"rate": 0.37}
+        ],
+        "marriedFilingSeparately": [
+            {"rate": 0.1, "upTo": 9700},
+            {"rate": 0.12, "upTo": 39475},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160725},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 306175},
+            {"rate": 0.37}
+        ],
+        "headOfHousehold": [
+            {"rate": 0.1, "upTo": 13850},
+            {"rate": 0.12, "upTo": 52850},
+            {"rate": 0.22, "upTo": 84200},
+            {"rate": 0.24, "upTo": 160700},
+            {"rate": 0.32, "upTo": 204100},
+            {"rate": 0.35, "upTo": 510300},
             {"rate": 0.37}
         ]
     }

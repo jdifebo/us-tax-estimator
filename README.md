@@ -10,7 +10,7 @@ tax advisors before engaging in any transaction.
 ```js
 var estimator = require("./us-tax-estimator.js");
 
-var year = "2017";  // 2017 or 2016
+var year = "2017";  // 2016 - 2019
 var filingStatus = "single"; // "single" or "marriedFilingJointly"
 var grossIncome = 300000;
 var exemptions = 1;
